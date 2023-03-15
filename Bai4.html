@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Mảng của bạn là:
+<p id="arr"></p>
+<p id="arrSum"></p>
+<p>Các giá trị MIN: <span id="minValue"></span></p>
+<p>Các giá trị MAX: <span id="maxValue"></span></p>
+</body>
+<script>
+    let arr = [];
+    let index = 0;
+    let data = "";
+    let flag = true;
+    do {
+        let check = prompt("Nhập vào giá trị là số: ");
+        let regex = /[0-9]/;
+        if (check.match(regex) && check !== "") {
+            arr[index] = check;
+            index++;
+        } else {
+            flag = false;
+        }
+    } while (flag);
+    for (let i = 0; i < arr.length; i++) {
+        data += "arr[" + i + "]" + " = " + arr[i];
+        data += "<br/>";
+    }
+    document.getElementById('arr').innerHTML = data;
+    arrSum(arr);
+    checkMaxMin(arr);
+
+    function arrSum(arr) {
+        let sumOdd = 0;
+        let dataOdd = "";
+        for (let i = 0; i < arr.length; i++) {
+                sumOdd += parseInt(arr[i]);
+        }
+        dataOdd += "Tổng: " + sumOdd;
+        document.getElementById('arrSum').innerHTML = dataOdd;
+    }
+    function checkMaxMin(arr) {
+        let min = arr[0];
+        let indexMin = 0;
+        let max = arr[0];
+        let indexMax = 0;
+        let dataMax = "";
+        let dataMin = "";
+        for (let i = 1; i < arr.length; i++) {
+            if (parseInt(arr[i]) > max) {
+                max = arr[i];
+                indexMax = i;
+            } else if (parseInt(arr[i]) < min) {
+                min = arr[i];
+                indexMin = i;
+            }
+        }
+        dataMin += "arr[" + indexMin + "]" + " = " + min;
+        dataMin += "<br/>";
+        dataMax += "arr[" + indexMax + "]" + " = " + max;
+        dataMax += "<br/>";
+        document.getElementById('minValue').innerHTML = dataMin;
+        document.getElementById('maxValue').innerHTML = dataMax;
+    }
+</script>
+</html>

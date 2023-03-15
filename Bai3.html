@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="style1"></p>
+<p id="style2"></p>
+<p id="style3"></p>
+<p id="style4"></p>
+<p id="style5"></p>
+</body>
+<script>
+  let styles = ["Jazz","Blues"];
+  document.getElementById('style1').innerHTML = styles.join();
+  styles.push("Rock-n-Roll");
+  document.getElementById('style2').innerHTML = styles.join();
+  let index = Math.floor(styles.length/2);
+  styles[index] = "Classics";
+  document.getElementById('style3').innerHTML = styles.join();
+  styles.shift();
+  document.getElementById('style4').innerHTML = styles.join();
+  styles.unshift("Rap","Reggae");
+  document.getElementById('style5').innerHTML = styles.join();
+</script>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Mảng của bạn là:
+<p id="arr"></p>
+Các giá trị chẵn và tổng của chúng:
+<p id="evenSum"></p>
+Các giá trị lẻ và tổng của chúng:
+<p id="oddSum"></p>
+Các giá trị là số nguyên tố:
+<p id="primeValue"></p>
+
+<p>Các giá trị MIN: <span id="minValue"></span></p>
+
+<p>Các giá trị MAX: <span id="maxValue"></span></p>
+Các giá trị giảm dần:
+<p id="sortArr"></p>
+Nhập giá trị muốn tìm trong mảng:
+<input type="number" id="value">
+<input type="button" onclick="searchValue();" value="Tìm kiếm">
+<p id="printValue"></p>
+</body>
+<script>
+    let arr = [];
+    let count = 1;
+    let data = "";
+    for (let i = 0; i < 5; i++) {
+        arr[i] = prompt("Nhập phần tử " + count++ + ":");
+        if(arr[i] === ''){
+            arr[i] = 0;
+        }
+    }
+    for (let i = 0; i < arr.length; i++) {
+        data += "arr[" + i + "]" + " = " + arr[i];
+        data += "<br/>";
+    }
+    document.getElementById('arr').innerHTML = data;
+    evenSum(arr);
+    oddSum(arr);
+    primeValue(arr);
+    checkMaxMin(arr);
+    sortArr(arr);
+
+    function evenSum(arr) {
+        let sumEven = 0;
+        let dataEven = ""
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 === 0) {
+                dataEven += "arr[" + i + "]" + " = " + arr[i];
+                dataEven += "<br/>";
+                sumEven += parseInt(arr[i]);
+            }
+        }
+        dataEven += "Tổng: " + sumEven;
+        document.getElementById('evenSum').innerHTML = dataEven;
+    }
+
+    function oddSum(arr) {
+        let sumOdd = 0;
+        let dataOdd = "";
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 !== 0) {
+                dataOdd += "arr[" + i + "]" + " = " + arr[i];
+                dataOdd += "<br/>";
+                sumOdd += parseInt(arr[i]);
+            }
+        }
+        dataOdd += "Tổng: " + sumOdd;
+        document.getElementById('oddSum').innerHTML = dataOdd;
+    }
+
+    function primeValue(arr) {
+        let dataPrime = "";
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] == 2) {
+                dataPrime += "arr[" + i + "]" + " = " + arr[i];
+                dataPrime += "<br/>";
+            } else if (arr[i] < 2) {
+                continue;
+            } else {
+                let flag = false;
+                for (let j = 2; j <= Math.sqrt(arr[i]); j++) {
+                    if (arr[i] % j === 0) {
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    dataPrime += "arr[" + i + "]" + " = " + arr[i];
+                    dataPrime += "<br/>";
+                }
+            }
+        }
+        document.getElementById('primeValue').innerHTML = dataPrime;
+    }
+
+    function checkMaxMin(arr) {
+        let min = arr[0];
+        let indexMin = 0;
+        let max = arr[0];
+        let indexMax = 0;
+        let dataMax = "";
+        let dataMin = "";
+        for (let i = 1; i < arr.length; i++) {
+            if (parseInt(arr[i]) > max) {
+                max = arr[i];
+                indexMax = i;
+            } else if (parseInt(arr[i]) < min) {
+                min = arr[i];
+                indexMin = i;
+            }
+        }
+        dataMin += "arr[" + indexMin + "]" + " = " + min;
+        dataMin += "<br/>";
+        dataMax += "arr[" + indexMax + "]" + " = " + max;
+        dataMax += "<br/>";
+        document.getElementById('minValue').innerHTML = dataMin;
+        document.getElementById('maxValue').innerHTML = dataMax;
+    }
+
+    function sortArr(arr) {
+        let dataSort = "";
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = arr.length - 1; j > i; j--) {
+                if (parseInt(arr[j - 1]) < parseInt(arr[j])) {
+                    let temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                }
+            }
+        }
+        for (let i = 0; i < arr.length; i++) {
+            dataSort += "arr[" + i + "]" + " = " + arr[i];
+            dataSort += "<br/>";
+        }
+        document.getElementById('sortArr').innerHTML = dataSort;
+    }
+
+    function searchValue() {
+        let value = document.getElementById('value').value;
+        let indexValue;
+        let printValue = "";
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                indexValue = i;
+                break;
+            }
+        }
+        for (let i = indexValue; i < arr.length; i++) {
+            if (arr[i] === value) {
+                printValue += "arr[" + i + "]" + " = " + arr[i];
+                printValue += "<br/>";
+            }
+        }
+        if (printValue !== "") {
+            document.getElementById('printValue').innerHTML = printValue;
+        } else {
+            document.getElementById('printValue').innerHTML = "Không có giá trị trong mảng!";
+        }
+
+    }
+</script>
+</html>

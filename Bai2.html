@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Mảng của bạn là:
+<p id="arr"></p>
+Mảng chỉ có phần tử ở đường biên là:
+<p id="arrPerimeter"></p>
+Mảng chỉ có phần tử ở đường chéo là:
+<p id="arrDiagonal"></p>
+Mảng sort tăng dần là:
+<p id="arrSort"></p>
+</body>
+<script>
+    let arr = [];
+    let count = 0;
+    let data = "";
+    for (let i = 0; i < 5; i++) {
+        arr[i] = [];
+        for (let j = 0; j < 5; j++) {
+            arr[i][j] = prompt("Nhập phần tử " + count++ + ":");
+            if (arr[i][j] === '') {
+                arr[i][j] = 0;
+            }
+        }
+    }
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 5; j++) {
+            data += arr[i][j] + '&nbsp;&nbsp;';
+        }
+        data += "<br/>";
+    }
+    document.getElementById('arr').innerHTML = data;
+    sortArr(arr);
+    printArrPerimater(arr);
+    printArrDiagonal(arr);
+
+    function sortArr(arr) {
+        let dataSort = "";
+        for (let i = 0; i < arr.length; i++) {
+            let arrTemp = arr[i];
+            for (let x = 0;x<arrTemp.length-1;x++){
+                for (let j = arrTemp.length - 1; j > x; j--) {
+                    if (parseInt(arrTemp[j]) < parseInt(arrTemp[j - 1])) {
+                        let temp = arrTemp[j];
+                        arrTemp[j] = arrTemp[j - 1];
+                        arrTemp[j - 1] = temp;
+                    }
+                }
+            }
+            arr[i]=arrTemp;
+        }
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                dataSort += arr[i][j] + '&nbsp;&nbsp;';
+            }
+            dataSort += "<br/>";
+        }
+        document.getElementById('arrSort').innerHTML = dataSort;
+    }
+    function printArrPerimater(arr) {
+        let dataPerimater = "";
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                if ((i === 0 || i === arr.length - 1) || (j === 0 || j === arr.length - 1)) {
+                    dataPerimater += arr[i][j] + '&nbsp;&nbsp;&nbsp;';
+                } else {
+                    dataPerimater += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                }
+            }
+            dataPerimater += "<br/>";
+        }
+        document.getElementById('arrPerimeter').innerHTML = dataPerimater;
+    }
+    function printArrDiagonal(arr) {
+        let dataDiagonal = "";
+        let num = arr.length - 1;
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                if (i === j) {
+                    dataDiagonal += arr[i][j] + '&nbsp;&nbsp;&nbsp;';
+                    if (Math.floor(arr.length/2) === i){
+                        num--;
+                    }
+                }else if (j === num) {
+                    dataDiagonal += arr[i][j] + '&nbsp;&nbsp;&nbsp;';
+                    num--;
+                }
+                else {
+                    dataDiagonal += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                }
+            }
+            dataDiagonal += "<br/>";
+        }
+        document.getElementById('arrDiagonal').innerHTML = dataDiagonal;
+    }
+
+</script>
+</html>

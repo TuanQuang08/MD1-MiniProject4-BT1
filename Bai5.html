@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="arr"></p>
+</body>
+<script>
+    let inputA = +prompt("Nhập vào giá trị A: ");
+    let inputB = +prompt("Nhập vào giá trị B: ");
+    // let a = +inputA;
+    // let b = +inputB;
+    let arr = [];
+    for (let i = inputA;i<=inputB;i++){
+        arr.push(i);
+    }
+    document.getElementById('arr').innerHTML = arr.join();
+</script>
+</html>
